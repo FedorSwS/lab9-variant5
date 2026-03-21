@@ -1,0 +1,25 @@
+# Go
+/bin
+*.exe
+go.work
+
+# Rust
+/target
+*.pdb
+Cargo.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
