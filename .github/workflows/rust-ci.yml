@@ -1,0 +1,36 @@
+name: Rust CI/CD
+
+on:
+  push:
+    paths:
+      - 'rust_class_lib/**'
+  pull_request:
+    paths:
+      - 'rust_class_lib/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-action@stable
+    
+    - name: Install Maturin
+      run: pip install maturin
+    
+    - name: Build Rust module
+      working-directory: ./rust_class_lib
+      run: maturin build --release
+    
+    - name: Run Rust tests
+      working-directory: ./rust_class_lib
+      run: cargo test
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rust-wheels
+        path: rust_class_lib/target/wheels/
